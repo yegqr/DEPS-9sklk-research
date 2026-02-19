@@ -198,11 +198,12 @@ try:
     cs = cs.sort_values("corrupt_pct", ascending=False)
 
     fig = px.bar(cs, x="Committee_Short", y="corrupt_pct",
-                 color="Committee_Risk",
-                 color_discrete_map={"🔴 High":"#e74c3c","🟡 Medium":"#f39c12","🟢 Low":"#2ecc71"},
-                 text="corrupt_pct",
-                 title="% корупціонерів по комітетам (🔴High / 🟡Medium / 🟢Low risk tier)",
-                 labels={"corrupt_pct":"% корупціонерів","Committee_Short":"Комітет","Committee_Risk":"Ризик"})
+             color="Committee_Risk",
+             color_discrete_map={"🔴 High":"#e74c3c","🟡 Medium":"#f39c12","🟢 Low":"#2ecc71"},
+             text="corrupt_pct",
+             title="% корупціонерів по комітетам (🔴High / 🟡Medium / 🟢Low risk tier)",
+             labels={"corrupt_pct":"% корупціонерів","Committee_Short":"Комітет","Committee_Risk":"Ризик"},
+             category_orders={"Committee_Short": cs["Committee_Short"].tolist()})
     fig.update_traces(texttemplate="%{text:.0f}%", textposition="outside")
     fig.update_layout(xaxis_tickangle=45)
     st.plotly_chart(fig, width="stretch")
